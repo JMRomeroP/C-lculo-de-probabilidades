@@ -1,0 +1,64 @@
+```{r data generation, echo = FALSE, results = "hide"}
+## DATA GENERATION
+n =sample(6:11,1)
+x = round(rbinom(n,20,0.5),0)
+y = round(rbinom(n,50 ,0.5),0)
+x = sort(x)
+y = sort(y)
+
+
+model = lm(y~ x)
+
+data =cbind(y, round(model$fitted.values,3))
+colnames(data) = c(" y"," valores estimados ")
+a = summary(model)
+a1=round(a$coefficients[1],3)
+a2=round(a$coefficients[2],3)
+x1 =sample(max(x):max(x)+4,1)
+
+est =round(a$sigma,3)
+est1 = est+ 0.2
+est2 = est-0.1
+est3 = est+ 0.4
+```
+
+Question
+========
+
+El administrador de  una  empresa,  realizó un estudio para analizar el efecto de la temperatura ambiente sobre la energía eléctrica (Kw) consumida por hora en una fábrica de productos de pintura. Otros factores se mantuvieron constantes para explorar de forma apropiada la relación entre las variables.
+Luego de ajustar el modelo de regresión lineal simple se reportó la siguiente tabla con los
+valores de $Y$ y $\widehat{Y}$ .
+
+
+```{r}
+data
+```
+
+¿Cuál es la estimación de $\sigma$? 
+Answerlist
+----------
+* `r est1`
+* `r est3`
+* `r est2`
+* `r est`
+
+
+Solution
+========
+
+Answerlist
+----------
+
+* false
+* false
+* false 
+* true
+
+
+
+Meta-information
+================
+exname: sc3
+extype: schoice
+exsolution: 0001
+exshuffle: 4
