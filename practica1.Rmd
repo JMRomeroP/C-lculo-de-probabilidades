@@ -1,0 +1,11 @@
+---
+title: "Primera práctica"
+author: "Carlos Jesús"
+date: "2024-07-11"
+output: html_document
+---
+
+
+# Ejercicio 1
+
+$$\sum \limits_{i=1}^{n}\, x_i =n\, \overline{x}  $$
