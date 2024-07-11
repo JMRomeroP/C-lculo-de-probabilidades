@@ -1,0 +1,73 @@
+### A Pluto.jl notebook ###
+# v0.19.43
+
+using Markdown
+using InteractiveUtils
+
+# This Pluto notebook uses @bind for interactivity. When running this notebook outside of Pluto, the following 'mock version' of @bind gives bound variables a default value (instead of an error).
+macro bind(def, element)
+    quote
+        local iv = try Base.loaded_modules[Base.PkgId(Base.UUID("6e696c72-6542-2067-7265-42206c756150"), "AbstractPlutoDingetjes")].Bonds.initial_value catch; b -> missing; end
+        local el = $(esc(element))
+        global $(esc(def)) = Core.applicable(Base.get, el) ? Base.get(el) : iv(el)
+        el
+    end
+end
+
+# ╔═╡ c4d41604-d34c-4eae-912e-ac36a38fe9fe
+begin
+	using Pkg
+	Pkg.add.(["Plots", "StatsBase", "PlutoUI", "DataStructures", "GR"])
+	
+	using DataStructures
+	using Plots
+	using StatsBase
+	using PlutoUI
+end
+
+# ╔═╡ 72068c50-3f75-11ef-280a-25f17c3a1ac2
+begin
+	using Markdown
+	using InteractiveUtils
+end
+
+# ╔═╡ 8007fe39-363d-4557-b372-da59bc57e8e8
+begin
+	num_sides = 6
+	sides = 1:num_sides
+end
+
+
+# ╔═╡ 37eec8df-2b69-420c-a8e2-a0391e2b9891
+begin
+	max_rolls = 10000
+	rolls2 = rand(1:num_sides, max_rolls)
+end
+
+
+# ╔═╡ 56c26e04-8acd-4ad5-bf86-544d0aecfc29
+@bind num_rolls2 Slider(1:max_rolls, show_value=true)
+
+# ╔═╡ 4bffca61-1e12-4253-bb4f-e517d5a618cc
+begin
+	freqs2 = SortedDict(StatsBase.countmap(rolls2[1:num_rolls2]))
+	
+	ks = collect(keys(freqs2))
+	vs = collect(values(freqs2)) ./ num_rolls2
+	
+	bar(ks, vs, leg=false, alpha=0.5, xlims=(0, num_sides+1),
+		size=(400,300),
+		xlabel="value", ylabel="relative frequency")
+	
+	hline!([1 / num_sides], ls=:dash, lw=3, c=:red)
+	
+	 ylims!(0, 0.3)
+end
+
+# ╔═╡ Cell order:
+# ╠═72068c50-3f75-11ef-280a-25f17c3a1ac2
+# ╠═c4d41604-d34c-4eae-912e-ac36a38fe9fe
+# ╠═8007fe39-363d-4557-b372-da59bc57e8e8
+# ╠═37eec8df-2b69-420c-a8e2-a0391e2b9891
+# ╠═56c26e04-8acd-4ad5-bf86-544d0aecfc29
+# ╠═4bffca61-1e12-4253-bb4f-e517d5a618cc
